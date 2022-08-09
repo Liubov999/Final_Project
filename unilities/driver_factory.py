@@ -9,7 +9,6 @@ class DriverFactory:
     FIREFOX = 2
     EDGE = 3
 
-
     @staticmethod
     def create_driver(driver_id, is_headless=False):
         if DriverFactory.CHROME == driver_id:
@@ -17,7 +16,7 @@ class DriverFactory:
             if is_headless:
                 chrome_options.add_argument("--headless")
             driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-            #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+             #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
         else:
             driver = webdriver.Chrome(ChromeDriverManager().install())
