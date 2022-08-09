@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from unilities.web_ui.base_page import BasePage
 
 
-
 class MainPage(BasePage):
     __page_title = (By.XPATH, '//button[@aria-label= "Back to homepage"]/span[@class="mat-button-wrapper"]/span')
 

@@ -1,6 +1,7 @@
 
 
 def test_check_title(open_main_page):
+
     """
     @test descriptions: Test verifies that page title is correct
     @test steps:

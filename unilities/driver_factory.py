@@ -4,12 +4,11 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-
-
 class DriverFactory:
     CHROME = 1
     FIREFOX = 2
     EDGE = 3
+
 
     @staticmethod
     def create_driver(driver_id, is_headless=False):
