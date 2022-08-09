@@ -1,7 +1,6 @@
 
 
 def test_check_title(open_main_page):
-
     """
     @test descriptions: Test verifies that page title is correct
     @test steps:
@@ -9,6 +8,7 @@ def test_check_title(open_main_page):
         2. Verify page title.
     @expected: main page title >>>
     """
+
 
 
     home_page = open_main_page

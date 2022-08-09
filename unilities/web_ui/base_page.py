@@ -11,6 +11,7 @@ class BasePage:
         return self.wait.until(EC.presence_of_element_located(locator))
 
 
+
     def get_text(self, locator):
         element = self.wait_for_element_located(locator)
         return element.text
