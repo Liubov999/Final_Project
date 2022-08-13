@@ -1,5 +1,5 @@
 import random
-
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
 
@@ -15,6 +15,8 @@ class MainPage(BasePage):
     __language_button = (By.XPATH, "//button[@aria-label='Language selection menu']")
     __language_radio_button = (By.XPATH, "//span[@class='mat-radio-label-content']/div")
     __items_header = (By.XPATH, "//app-search-result/div/div/div/div[@class='ng-star-inserted']")
+    __search_button = (By.XPATH, "//mat-icon[normalize-space(text()) = 'search']")
+    __search_input = (By.XPATH, "//input")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -43,3 +45,10 @@ class MainPage(BasePage):
         random_product = random.choice(products)
         return random_product.text
 
+    def click_search_button(self):
+        self.click(self.__search_button)
+
+    def search_request(self, request):
+        search_field = self.wait_for_element_located(self.__search_input)
+        search_field.send_keys(request)
+        search_field.send_keys(Keys.RETURN)
