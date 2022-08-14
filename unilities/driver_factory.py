@@ -10,7 +10,7 @@ class DriverFactory:
     EDGE = 3
 
     @staticmethod
-    def create_driver(driver_id, is_headless=False):
+    def create_driver(driver_id, is_headless=True):
         if DriverFactory.CHROME == driver_id:
             chrome_options = Options()
             if is_headless:
