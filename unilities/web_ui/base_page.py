@@ -1,3 +1,4 @@
+from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -30,6 +31,28 @@ class BasePage:
             if element.text.strip() == value:
                 element.click()
                 break
+
+    def send_keys(self, locator, value, is_clear=False):
+        element = self.wait_for_element_located(locator)
+        if is_clear:
+            element.clear()
+        element.send_keys(value)
+
+    def is_element_present(self, locator):
+        try:
+            self.wait_for_element_located(locator)
+            return True
+        except TimeoutException:
+            return False
+
+    def is_element_active(self, locator):
+            element = self.wait_for_element_located(locator)
+            state = element.get_attribute('disabled')
+            if state == 'true':
+                return False
+            elif state == 'false':
+                return True
+
 
 
             # if element.get_attribute('aria-label') == value:

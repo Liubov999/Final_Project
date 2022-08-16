@@ -1,9 +1,10 @@
-import random
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+import random
 
+from selenium.webdriver.common.keys import Keys
 
-from unilities.web_ui.base_page import BasePage
+from pythonProject.Final_Project_Juice.page_objects.login_page import LoginPage
+from pythonProject.Final_Project_Juice.utilities.web_ua.base_page import BasePage
 
 
 class MainPage(BasePage):
@@ -15,11 +16,17 @@ class MainPage(BasePage):
     __language_button = (By.XPATH, "//button[@aria-label='Language selection menu']")
     __language_radio_button = (By.XPATH, "//span[@class='mat-radio-label-content']/div")
     __items_header = (By.XPATH, "//app-search-result/div/div/div/div[@class='ng-star-inserted']")
-    __search_button = (By.XPATH, "//mat-icon[normalize-space(text()) = 'search']")
-    __search_input = (By.XPATH, "//input")
+    __search_icon = (By.XPATH, "//mat-icon[text() = ' search ']")
+    __search_field = (By.XPATH, "//input[@type='text']")
+    __search_result = (By.XPATH, "//div[@class='ng-star-inserted']")
+    __not_found_search_result = (By.XPATH, "//span[@class = 'noResultText']")
+    __account_button = (By.XPATH, "//button[@id = 'navbarAccount']")
+    __login_button = (By.XPATH, "//button[@id = 'navbarLoginButton']")
+    __test_locator = (By.XPATH, 'blablabla')
 
     def __init__(self, driver):
-        super().__init__(driver)
+        self.driver = driver
+        super().__init__(self.driver)
 
     def get_page_title(self):
         return self.get_text(self.__page_title)
@@ -45,10 +52,19 @@ class MainPage(BasePage):
         random_product = random.choice(products)
         return random_product.text
 
-    def click_search_button(self):
-        self.click(self.__search_button)
+    def click_search_icon(self):
+        self.click(self.__search_icon)
 
-    def search_request(self, request):
-        search_field = self.wait_for_element_located(self.__search_input)
-        search_field.send_keys(request)
-        search_field.send_keys(Keys.RETURN)
+    def search_existing_product(self, existing_product):
+        return self.send_keys(self.__search_field, existing_product)
+
+    def get_search_value(self):
+        return self.get_text(self.__search_result)
+
+    def get_not_found_search_value(self):
+        return self.get_text(self.__not_found_search_result)
+
+    def open_login_page(self):
+        self.click(self.__account_button)
+        self.click(self.__login_button)
+        return LoginPage(self.driver)
